@@ -12,186 +12,395 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --border-primary: #333333;
+            --border-accent: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-accent: #00d4ff;
+            --text-success: #00ff88;
+            --text-warning: #ffaa00;
+            --text-danger: #ff4444;
+            --shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+        
         body {
             min-height: 100vh;
-            background: linear-gradient(to bottom, #0c0a09, #111827);
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 80rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
-        h1 {
-            font-size: 2.25rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
+        .header {
             text-align: center;
-            color: #22d3ee;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-accent) 0%, #ffffff 50%, var(--text-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
         
         .grid {
             display: grid;
             gap: 2rem;
-            grid-template-columns: 1fr 1fr;
-        }
-        
-        @media (max-width: 1024px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            margin-bottom: 2rem;
         }
         
         .card {
-            background: #1f2937;
-            border: 1px solid #0891b2;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
         }
         
         .card h2 {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #67e8f9;
+            color: var(--text-accent);
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         label {
             display: block;
-            color: #d1d5db;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
         
-        input {
+        input, select {
             width: 100%;
-            padding: 0.5rem;
-            background: #374151;
-            color: white;
-            border: 1px solid #06b6d4;
-            border-radius: 0.375rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
             outline: none;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
-        input:focus {
-            border-color: #22d3ee;
-            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+        input:focus, select:focus {
+            border-color: var(--border-accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            background: #222;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .input-group input {
+            flex: 1;
         }
         
         button {
-            padding: 0.5rem 1rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 0.375rem;
-            font-weight: 500;
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            margin-right: 0.5rem;
-            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
-            background: #0891b2;
+            background: linear-gradient(135deg, #0080ff, #00d4ff);
             color: white;
         }
         
         .btn-primary:hover {
-            background: #0e7490;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
         }
         
         .btn-success {
-            background: #059669;
+            background: linear-gradient(135deg, #00aa66, #00ff88);
             color: white;
         }
         
         .btn-success:hover {
-            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
         }
         
-        .result-text {
-            margin-bottom: 1rem;
-            font-size: 1rem;
+        .btn-warning {
+            background: linear-gradient(135deg, #ff8800, #ffaa00);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 170, 0, 0.3);
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-primary);
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
         
         .result-value {
             font-weight: bold;
-            color: #22d3ee;
+            color: var(--text-accent);
+            font-size: 1.2rem;
         }
         
         .countdown {
-            color: #fbbf24;
-            font-family: monospace;
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, #ff4400, #ff6600);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            box-shadow: 0 8px 25px rgba(255, 68, 0, 0.3);
+        }
+        
+        .efficiency-indicator {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .efficiency-excellent {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 170, 102, 0.2));
+            border: 1px solid var(--text-success);
+        }
+        
+        .efficiency-good {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.2), rgba(255, 136, 0, 0.2));
+            border: 1px solid var(--text-warning);
+        }
+        
+        .efficiency-poor {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.2), rgba(255, 34, 34, 0.2));
+            border: 1px solid var(--text-danger);
         }
         
         .chart-container {
-            margin-top: 3rem;
+            grid-column: 1 / -1;
         }
         
         .chart-card {
-            background: #1f2937;
-            border: 1px solid #0891b2;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
         }
         
         #healingChart {
-            max-height: 250px;
+            max-height: 400px;
+        }
+        
+        .tabs {
+            display: none;
+        }
+        
+        .tab {
+            display: none;
+        }
+        
+        .tab-content {
+            display: block;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏰 Castle Event Optimizer - Whiteout Survival</h1>
+        <div class="header">
+            <h1>🏰 Castle Event Optimizer</h1>
+            <div class="subtitle">Whiteout Survival - Advanced Rally Strategy Calculator</div>
+        </div>
         
         <div class="grid">
             <div class="card">
-                <h2>⚙️ Inputs</h2>
-                <div class="form-group">
-                    <label for="infirmaryCapacity">Infirmary Capacity</label>
-                    <input type="number" id="infirmaryCapacity" value="0">
+                <h2>⚙️ Configuration</h2>
+                    <div class="form-group">
+                        <label for="infirmaryCapacity">Infirmary Capacity</label>
+                        <input type="number" id="infirmaryCapacity" value="0">
+                        <div class="form-group">
+                        <label for="injuryRate">Injury Rate (%)</label>
+                        <input type="number" id="injuryRate" value="35" min="0" max="100" step="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="safetyBuffer">Safety Buffer (seconds)</label>
+                        <input type="number" id="safetyBuffer" value="10" min="0" max="60">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="healedPer10s">Troops Healed Every 10 Seconds</label>
-                    <input type="number" id="healedPer10s" value="0">
+                    <div class="form-group">
+                        <label for="healedPer10s">Troops Healed Every 10 Seconds</label>
+                        <input type="number" id="healedPer10s" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="marchTime">Time to Target (seconds)</label>
+                        <input type="number" id="marchTime" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="squadSize">March Squad Capacity</label>
+                        <input type="number" id="squadSize" value="0">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="marchTime">Time to Turret (in seconds)</label>
-                    <input type="number" id="marchTime" value="0">
-                </div>
-                <div class="form-group">
-                    <label for="squadSize">March Squad Capacity</label>
-                    <input type="number" id="squadSize" value="0">
-                </div>
-                <button class="btn-primary" onclick="startCountdown()">⏱ Start Countdown</button>
-                <button class="btn-success" onclick="exportSettings()">📁 Export Settings</button>
-            </div>
-            
-            <div class="card">
-                <h2>📊 Results</h2>
-                <div class="result-text">
-                    Estimated Injured Per March: <span class="result-value" id="injuredPerMarch">0</span>
-                </div>
-                <div class="result-text">
-                    🔁 Recommended March Interval: <span class="result-value" id="recommendedInterval">0 seconds</span>
-                </div>
-                <div id="countdownDisplay" class="countdown" style="display: none;">
-                    ⏳ Countdown: <span id="countdownValue">0</span>s
+                
+                <div class="card">
+                    <h2>📊 Rally Analytics</h2>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-label">Estimated Injured</div>
+                            <div class="result-value" id="injuredPerMarch">0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Optimal Interval</div>
+                            <div class="result-value" id="recommendedInterval">0s</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Efficiency Rating</div>
+                            <div class="result-value" id="efficiencyRating">-</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Healing Utilization</div>
+                            <div class="result-value" id="healingUtilization">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Downtime Ratio</div>
+                            <div class="result-value" id="downtimeRatio">0%</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="startCountdown()">⏱ Start Rally Timer</button>
+                    <button class="btn-success" onclick="exportSettings()">📁 Export Strategy</button>
+                    <button class="btn-warning" onclick="resetAll()">🔄 Reset All</button>
+                    
+                    <div id="countdownDisplay" class="countdown" style="display: none;">
+                        ⏳ Next Rally In: <span id="countdownValue">0</span>s
+                    </div>
+                    
+                    <div id="efficiencyIndicator" class="efficiency-indicator" style="display: none;"></div>
                 </div>
             </div>
         </div>
         
         <div class="chart-container">
             <div class="chart-card">
-                <h2>📈 Healing Timeline</h2>
+                <h2>📈 Rally Timeline Analysis</h2>
                 <canvas id="healingChart"></canvas>
             </div>
         </div>
@@ -200,58 +409,116 @@
     <script>
         let countdownInterval = null;
         let healingChart = null;
+        let currentTab = 'basic';
         
-        // Get DOM elements
-        const infirmaryCapacityInput = document.getElementById('infirmaryCapacity');
-        const healedPer10sInput = document.getElementById('healedPer10s');
-        const marchTimeInput = document.getElementById('marchTime');
-        const squadSizeInput = document.getElementById('squadSize');
-        const injuredPerMarchDisplay = document.getElementById('injuredPerMarch');
-        const recommendedIntervalDisplay = document.getElementById('recommendedInterval');
-        const countdownDisplay = document.getElementById('countdownDisplay');
-        const countdownValue = document.getElementById('countdownValue');
-        
-        // State variables
+        // State management
         let state = {
             infirmaryCapacity: 0,
             healedPer10s: 0,
             marchTime: 0,
             squadSize: 0,
+            injuryRate: 35,
+            safetyBuffer: 10,
+            // Calculated values
             injuredPerMarch: 0,
-            recommendedInterval: 0
+            recommendedInterval: 0,
+            efficiency: 0,
+            healingUtilization: 0,
+            downtimeRatio: 0
+        };
+        
+        // DOM elements
+        const elements = {
+            infirmaryCapacity: document.getElementById('infirmaryCapacity'),
+            healedPer10s: document.getElementById('healedPer10s'),
+            marchTime: document.getElementById('marchTime'),
+            squadSize: document.getElementById('squadSize'),
+            injuryRate: document.getElementById('injuryRate'),
+            safetyBuffer: document.getElementById('safetyBuffer')
         };
         
         // Add event listeners
-        infirmaryCapacityInput.addEventListener('input', updateCalculations);
-        healedPer10sInput.addEventListener('input', updateCalculations);
-        marchTimeInput.addEventListener('input', updateCalculations);
-        squadSizeInput.addEventListener('input', updateCalculations);
+        Object.values(elements).forEach(element => {
+            if (element) {
+                element.addEventListener('input', updateCalculations);
+            }
+        });
         
         function updateCalculations() {
-            // Update state
-            state.infirmaryCapacity = Number(infirmaryCapacityInput.value) || 0;
-            state.healedPer10s = Number(healedPer10sInput.value) || 0;
-            state.marchTime = Number(marchTimeInput.value) || 0;
-            state.squadSize = Number(squadSizeInput.value) || 0;
+            // Update state from inputs
+            Object.keys(elements).forEach(key => {
+                if (elements[key]) {
+                    state[key] = Number(elements[key].value) || 0;
+                }
+            });
             
-            // Calculate injured per march (35% of squad size)
-            state.injuredPerMarch = Math.floor(state.squadSize * 0.35);
+            // Calculate injured per march with injury rate
+            const injuryRate = state.injuryRate / 100;
+            state.injuredPerMarch = Math.floor(state.squadSize * injuryRate);
             
-            // Calculate recommended interval
-            if (state.injuredPerMarch > 0 && state.healedPer10s > 0) {
-                const troopsPerSecond = state.healedPer10s / 10;
-                const healingTime = state.injuredPerMarch / troopsPerSecond;
-                state.recommendedInterval = Math.ceil(healingTime + state.marchTime);
+            // Calculate healing rate
+            const healingRate = state.healedPer10s / 10;
+            
+            // Calculate optimal interval
+            if (state.injuredPerMarch > 0 && healingRate > 0) {
+                const healingTime = state.injuredPerMarch / healingRate;
+                const totalCycleTime = healingTime + state.marchTime + state.safetyBuffer;
+                state.recommendedInterval = Math.ceil(totalCycleTime);
+                
+                // Healing utilization
+                const activeHealingTime = healingTime;
+                state.healingUtilization = Math.min(100, Math.round((activeHealingTime / state.recommendedInterval) * 100));
+                
+                // Downtime calculation
+                const downtime = state.marchTime + state.safetyBuffer;
+                state.downtimeRatio = Math.round((downtime / state.recommendedInterval) * 100);
+                
+                // Efficiency rating
+                if (state.healingUtilization >= 80) {
+                    state.efficiency = 'Excellent';
+                } else if (state.healingUtilization >= 60) {
+                    state.efficiency = 'Good';
+                } else {
+                    state.efficiency = 'Poor';
+                }
             } else {
                 state.recommendedInterval = 0;
+                state.healingUtilization = 0;
+                state.downtimeRatio = 0;
+                state.efficiency = '-';
             }
             
-            // Update display
-            injuredPerMarchDisplay.textContent = state.injuredPerMarch;
-            recommendedIntervalDisplay.textContent = state.recommendedInterval + ' seconds';
-            
-            // Update chart
+            updateDisplay();
             updateChart();
+        }
+        
+        function updateDisplay() {
+            // Update displays
+            document.getElementById('injuredPerMarch').textContent = state.injuredPerMarch;
+            document.getElementById('recommendedInterval').textContent = state.recommendedInterval + 's';
+            document.getElementById('efficiencyRating').textContent = state.efficiency;
+            document.getElementById('healingUtilization').textContent = state.healingUtilization + '%';
+            document.getElementById('downtimeRatio').textContent = state.downtimeRatio + '%';
+            
+            // Update efficiency indicator
+            const indicator = document.getElementById('efficiencyIndicator');
+            if (state.efficiency !== '-') {
+                indicator.style.display = 'block';
+                indicator.className = 'efficiency-indicator';
+                
+                if (state.efficiency === 'Excellent') {
+                    indicator.classList.add('efficiency-excellent');
+                    indicator.textContent = '🎯 Excellent Efficiency - Optimal rally timing achieved!';
+                } else if (state.efficiency === 'Good') {
+                    indicator.classList.add('efficiency-good');
+                    indicator.textContent = '⚠️ Good Efficiency - Consider optimizing healing or march times.';
+                } else {
+                    indicator.classList.add('efficiency-poor');
+                    indicator.textContent = '❌ Poor Efficiency - Rally timing needs significant improvement.';
+                }
+            } else {
+                indicator.style.display = 'none';
+            }
         }
         
         function updateChart() {
@@ -261,16 +528,46 @@
                 healingChart.destroy();
             }
             
-            // Generate chart data
-            let data = [];
-            let labels = [];
+            if (state.injuredPerMarch <= 0 || state.healedPer10s <= 0) {
+                healingChart = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: [], datasets: [] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
             
-            if (state.injuredPerMarch > 0 && state.healedPer10s > 0) {
-                const troopsPerSecond = state.healedPer10s / 10;
+            const effectiveHealingRate = (state.healedPer10s / 10) * (1 + state.healingBonus / 100);
+            const timeToHeal = Math.ceil(state.injuredPerMarch / effectiveHealingRate);
+            
+            // Generate data points
+            let healingData = [];
+            let labels = [];
+            let injuredData = [];
+            
+            // Show multiple rally cycles
+            const cyclesToShow = 3;
+            const totalTimespan = state.recommendedInterval * cyclesToShow;
+            
+            for (let t = 0; t <= totalTimespan; t += 5) {
+                labels.push(t);
                 
-                for (let t = 0; t <= state.recommendedInterval; t += 1) {
-                    labels.push(t);
-                    data.push(Math.min(Math.floor(t * troopsPerSecond), state.injuredPerMarch));
+                const currentCycle = Math.floor(t / state.recommendedInterval);
+                const timeInCycle = t % state.recommendedInterval;
+                
+                if (timeInCycle <= timeToHeal) {
+                    // Healing phase
+                    const healed = Math.min(Math.floor(timeInCycle * effectiveHealingRate), state.injuredPerMarch);
+                    healingData.push(healed);
+                    injuredData.push(state.injuredPerMarch - healed);
+                } else if (timeInCycle <= timeToHeal + state.marchTime) {
+                    // March phase
+                    healingData.push(state.injuredPerMarch);
+                    injuredData.push(0);
+                } else {
+                    // Safety buffer/preparation phase
+                    healingData.push(state.injuredPerMarch);
+                    injuredData.push(state.injuredPerMarch);
                 }
             }
             
@@ -280,12 +577,20 @@
                     labels: labels,
                     datasets: [{
                         label: 'Troops Healed',
-                        data: data,
-                        borderColor: '#22d3ee',
-                        backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                        data: healingData,
+                        borderColor: '#00d4ff',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
                         borderWidth: 3,
-                        fill: true,
-                        tension: 0
+                        fill: false,
+                        tension: 0.1
+                    }, {
+                        label: 'Injured Troops',
+                        data: injuredData,
+                        borderColor: '#ff4444',
+                        backgroundColor: 'rgba(255, 68, 68, 0.1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
                     }]
                 },
                 options: {
@@ -293,9 +598,7 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            labels: {
-                                color: '#d1d5db'
-                            }
+                            labels: { color: '#a0a0a0' }
                         }
                     },
                     scales: {
@@ -303,27 +606,19 @@
                             title: {
                                 display: true,
                                 text: 'Time (seconds)',
-                                color: '#d1d5db'
+                                color: '#a0a0a0'
                             },
-                            ticks: {
-                                color: '#d1d5db'
-                            },
-                            grid: {
-                                color: '#444'
-                            }
+                            ticks: { color: '#a0a0a0' },
+                            grid: { color: '#333333' }
                         },
                         y: {
                             title: {
                                 display: true,
-                                text: 'Troops Healed',
-                                color: '#d1d5db'
+                                text: 'Number of Troops',
+                                color: '#a0a0a0'
                             },
-                            ticks: {
-                                color: '#d1d5db'
-                            },
-                            grid: {
-                                color: '#444'
-                            }
+                            ticks: { color: '#a0a0a0' },
+                            grid: { color: '#333333' }
                         }
                     }
                 }
@@ -333,6 +628,9 @@
         function startCountdown() {
             if (state.recommendedInterval > 0) {
                 let countdown = state.recommendedInterval;
+                const countdownDisplay = document.getElementById('countdownDisplay');
+                const countdownValue = document.getElementById('countdownValue');
+                
                 countdownValue.textContent = countdown;
                 countdownDisplay.style.display = 'block';
                 
@@ -347,31 +645,54 @@
                     if (countdown <= 0) {
                         clearInterval(countdownInterval);
                         countdownDisplay.style.display = 'none';
+                        
+                        // Show notification
+                        alert('🏰 Rally time! Launch your next attack!');
                     }
                 }, 1000);
             }
         }
         
         function exportSettings() {
-            const data = {
-                infirmaryCapacity: state.infirmaryCapacity,
-                healedPer10s: state.healedPer10s,
-                marchTime: state.marchTime,
-                squadSize: state.squadSize,
-                injuredPerMarch: state.injuredPerMarch,
-                recommendedInterval: state.recommendedInterval
+            const exportData = {
+                ...state,
+                timestamp: new Date().toISOString(),
+                version: '2.0'
             };
             
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'castle_event_strategy.json';
+            link.download = `whiteout_castle_strategy_${Date.now()}.json`;
             link.click();
         }
         
-        // Initialize chart on load
+        function resetAll() {
+            if (confirm('Reset all settings to default values?')) {
+                Object.values(elements).forEach(element => {
+                    if (element.type === 'number') {
+                        element.value = 0;
+                    } else if (element.type === 'select-one') {
+                        element.selectedIndex = 0;
+                    }
+                });
+                
+                
+                elements.injuryRate.value = 35;
+                elements.safetyBuffer.value = 10;
+                
+                updateCalculations();
+                
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('countdownDisplay').style.display = 'none';
+                }
+            }
+        }
+        
+        // Initialize
         window.addEventListener('load', () => {
-            updateChart();
+            updateCalculations();
         });
     </script>
 </body>
